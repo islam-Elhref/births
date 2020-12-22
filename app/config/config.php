@@ -11,7 +11,6 @@ define('MODELS_PATH', APP_PATH . 'models' . DS);
 define('SESSION_PATH', LIB_PATH . 'sessions');
 date_default_timezone_set ('Africa/Cairo' );
 
-
 defined('DATABASE_HOST_NAME')             ? null : define('DATABASE_HOST_NAME' , 'localhost');
 defined('DATABASE_USER_NAME')             ? null : define('DATABASE_USER_NAME' , 'root');
 defined('DATABASE_PASSWORD')              ? null : define('DATABASE_PASSWORD' , '');
