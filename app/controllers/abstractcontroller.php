@@ -62,7 +62,7 @@ class AbstractController
         } else {
             $file_view = VIEWS_PATH . $this->_controller . DS . $this->_action . '.view.php';
             if (!file_exists($file_view)) {
-                require_once VIEWS_PATH . 'notfound' . DS . 'notfound.view.php';
+                $file_view = VIEWS_PATH . 'notfound' . DS . 'notfound.view.php';
             }
         }
         $this->_language->load('template','default');
