@@ -8913,6 +8913,10 @@ h1 span {
     margin-right: 300px;
 }
 
+.text_error{
+    font-size: 80px;
+}
+
 /*table */
 
 #mytable tbody tr td {

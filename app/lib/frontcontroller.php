@@ -41,15 +41,16 @@ class FrontController
 
         if (!class_exists($Class_controller)) {
             $Class_controller = self::NOT_FOUND_CONTROLLER;
-        }
-
-        $controller = new $Class_controller();
-
-        if (!method_exists($Class_controller, $actionName)) {
+            $this->_controller = 'NotFoundController';
             $this->_action = $actionName = 'notfoundAction';
         }
 
-        $this->language->setView($this->_controller , $this->_action);
+        if (!method_exists($Class_controller, $actionName)) {
+            $this->_controller = 'NotFoundController';
+            $this->_action = $actionName = 'notfoundAction';
+        }
+        $controller = new $Class_controller();
+
 
         $controller->setController($this->_controller);
         $controller->setAction($this->_action);
