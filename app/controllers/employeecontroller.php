@@ -5,7 +5,6 @@ namespace MYMVC\CONTROLLERS;
 
 use MYMVC\LIB\filter;
 use MYMVC\LIB\Helper;
-use MYMVC\LIB\Language;
 use MYMVC\MODELS\EmployeeModel;
 use PDOException;
 
@@ -18,7 +17,7 @@ class EmployeeController extends AbstractController
 
     public function defaultAction()
     {
-
+        $this->_language->load('Employee','default');
 
         $this->_data['employees'] = EmployeeModel::getAll();
         $this->view();
@@ -26,7 +25,7 @@ class EmployeeController extends AbstractController
 
     public function editAction()
     {
-
+        $this->_language->load('Employee','edit');
         if (isset($this->_params[0])) {
             $id = abs($this->filterInt($this->_params[0]));
             $emp = EmployeeModel::getByPK($id);
@@ -55,6 +54,7 @@ class EmployeeController extends AbstractController
 
     public function addAction()
     {
+        $this->_language->load('Employee','add');
         if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
             $newEmp = new EmployeeModel($_POST['name'], $_POST['age'], $_POST['address'], $_POST['salary'], $_POST['tax']);
             try {

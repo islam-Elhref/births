@@ -1,6 +1,6 @@
 <?php
-$_['Text_home'] = 'الصفحة الرئيسية' ;
-$_['Text_employees'] = 'الموظفيـن' ;
+$_['Text_home'] = 'الأحصائيات العامه' ;
+$_['Text_users'] = 'المستخدمين' ;
 $_['Text_changeLanguage'] = 'English' ;
 $_['Text_logout'] = 'تسجيل الخروج' ;
 $_['h1FirstName'] = 'الحريف';

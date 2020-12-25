@@ -1,6 +1,6 @@
 <?php
-$_['Text_home'] = 'Home' ;
-$_['Text_employees'] = 'Employees' ;
+$_['Text_home'] = 'General Stats.' ;
+$_['Text_users'] = 'Users' ;
 $_['Text_changeLanguage'] = 'arabic' ;
 $_['Text_logout'] = 'LogOut' ;
 $_['h1FirstName'] = 'Elhref';

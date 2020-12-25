@@ -16,7 +16,9 @@ class AbstractController
     protected $_session;
     protected $_data = [];
 
-    public function notfoundAction(){
+    public function notfoundAction()
+    {
+        $this->_language->load('notfound','default');
         $this->view();
     }
 
@@ -51,26 +53,27 @@ class AbstractController
         $this->_session = $session;
     }
 
-    public function view(){
-        if ($this->_action == FrontController::NOT_FOUND_ACTION){
-            require_once VIEWS_PATH . 'notfound' . DS . 'notfound.view.php';
-        }else{
-            $file_view = VIEWS_PATH . $this->_controller . DS . $this->_action .'.view.php';
-            if (file_exists($file_view)){
-                $this->_language->loadLangTemp();
-                $this->_language->load();
 
-                $this->_data = array_merge($this->_data , $this->_language->getDictionary() );
 
-                $this->_data['session'] = $this->_session;
-
-                $this->_template->setData($this->_data);
-                $this->_template->render($file_view);
-            }else{
-                require_once VIEWS_PATH . 'notfound' . DS . 'notfound_file.view.php';
+    public function view()
+    {
+        if ($this->_action == FrontController::NOT_FOUND_ACTION) {
+            $file_view = VIEWS_PATH . 'notfound' . DS . 'notfound.view.php';
+        } else {
+            $file_view = VIEWS_PATH . $this->_controller . DS . $this->_action . '.view.php';
+            if (!file_exists($file_view)) {
+                require_once VIEWS_PATH . 'notfound' . DS . 'notfound.view.php';
             }
-
         }
+        $this->_language->load('template','default');
+
+        $this->_data = array_merge($this->_data, $this->_language->getDictionary());
+
+        $this->_data['session'] = $this->_session;
+
+        $this->_template->setData($this->_data);
+        $this->_template->render($file_view);
+
     }
 
 
