@@ -217,7 +217,7 @@ button {
 }
 
 button:focus {
-    outline: 1px dotted;
+    outline-style: dotted;
     outline: 5px auto -webkit-focus-ring-color
 }
 
@@ -3395,7 +3395,7 @@ input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="butto
     }
 
     .card-deck .card {
-        flex: 1 0 0%;
+        flex: 1 0 0;
         margin-right: 15px;
         margin-bottom: 0;
         margin-left: 15px
@@ -3413,7 +3413,7 @@ input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="butto
     }
 
     .card-group > .card {
-        flex: 1 0 0%;
+        flex: 1 0 0;
         margin-bottom: 0
     }
 
@@ -8766,7 +8766,6 @@ h1 span {
     transition-duration: 0.5s;
     transition-property: transform , color;
 }
-
 .user_info .btn:hover,.navbar_btn:hover{
     color: #1979a9;
 
@@ -8790,11 +8789,11 @@ h1 span {
 
 /* navbar*/
 
+
 .navbar {
     background: #222d32;
     position: fixed;
     left: -250px;
-    overflow: hidden;
     margin-top: 62px;
     width: 300px;
     height: calc(100% - 7%);
@@ -8804,6 +8803,7 @@ h1 span {
     transition-duration: 0.5s;
     transition-property: left;
 }
+
 
 .navbar .navbar-info {
     width: 100%;
@@ -8833,30 +8833,40 @@ h1 span {
     box-sizing: border-box;
 }
 
+
+
 .navbar .links a {
     color: #b8c7ce;
     display: block;
-    padding: 10px;
     text-decoration: none;
+    padding: 10px;
     transition: all 0.3s ease-in-out;
     border-bottom: solid 1px #273339;
     box-sizing: border-box;
-    border-right: solid 5px transparent;
+
     transition-duration: 0.5s;
     transition-property: background;
 }
 
-.navbar .links a:first-child {
-    border-top: solid 1px #273339;
+.links > li.active {
+    border-bottom: 2px solid #f1f1f1;
+    padding: 0;
 }
 
-.navbar .links a:hover {
-    background: #1979a9;
+
+.navbar .links li.active > a{
+    padding: 10px;
+}
+
+.navbar.open .links li.active > a {
+    padding: 10px;
 }
 
 .navbar.open {
     left: 0;
 }
+
+
 
 .navbar .navbar-info {
     transition-property: opacity;
@@ -8883,6 +8893,7 @@ h1 span {
 .navbar.open .links a {
     text-align: left;
 }
+
 .navbar .links a i {
     font-size: 22px;
 }
@@ -8896,7 +8907,87 @@ h1 span {
     padding-top: 4px;
     margin-right: 5px;
 }
+.navbar.open .links a {
+    width: 100%;
+}
+.navbar.open .links a i{
+    border: none;
+    padding: 0;
+}
 
+
+.navbar .links li a:hover {
+    background: #1979a9;
+}
+
+.links > li.active > a {
+    border-left: 2px solid #f1f1f1;
+
+}
+
+
+.links > li ul.submenu{
+    display: none;
+}
+
+.links > li.active > a{
+    position: relative;
+}
+
+.links > li.active > a:before{
+    content: '';
+    /* border-left: 2px; */
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 250px;
+    right: 0px;
+    bottom: 0;
+    width: 0;
+    height: 100%;
+    border-left: 2px solid #f1f1f1;
+}
+
+.navbar.open .links > li.active > a:before{
+    content: '';
+    /* border-left: 2px; */
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 250px;
+    right: 0px;
+    bottom: 0;
+    width: 0;
+    height: 100%;
+    border-left: 2px solid #f1f1f1;
+}
+
+.links > li.active ul.submenu{
+    display: block;
+}
+
+
+.links > li ul.submenu > li{
+    padding-left: 20px;
+}
+.links > li ul.submenu li.subactive{
+    background: #0c4967;
+}
+
+.links > li ul.submenu li a i ,.navbar.open .links > li ul.submenu li a i{
+    font-size: 1em !important;
+    height: fit-content;
+    padding-top: 7px;
+    color: #3498db;
+}
+
+.links > li.active ul a{
+
+}
+
+.links > li.active ul a{
+    border-top: none;
+}
 /* navbar*/
 
 
@@ -8910,6 +9001,7 @@ h1 span {
 
 .view .title {
     text-align: left;
+    margin-bottom: 35px;
     font-family: 'Cairo', sans-serif;
     font-size: 2em;
 }
@@ -8925,6 +9017,11 @@ h1 span {
 
 
 /*table */
+
+.btn_add{
+    float: right;
+    margin-top: 15px;
+}
 
 #mytable tbody tr td {
     padding: 6px;
