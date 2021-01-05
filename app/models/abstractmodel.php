@@ -5,7 +5,6 @@ namespace MYMVC\MODELS;
 
 use MYMVC\LIB\Database\DatabaseHandler;
 use \pdo;
-use PDOException;
 use \PDOStatement;
 
 class AbstractModel
