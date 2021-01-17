@@ -8,6 +8,22 @@ class Template
     private $template;
     private $data;
 
+    public function GetMessage(){
+        if (isset($_SESSION['message'])) {
+            if (!isset($_SESSION['error'])) {
+                ?>
+
+                <div class="alert alert-success" id="message"><?= $_SESSION['message'] ?></div>
+
+                <?php
+            } else { ?>
+                <div class="alert alert-danger" id="message"><?= $_SESSION['message'] ?></div>
+                <?php
+            }
+            unset($_SESSION['message'], $_SESSION['error']);
+        }
+    }
+
     public function checkurl($url){
         $parce_url = trim(parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH ) , '/');
         $parce_url = explode('/' , $parce_url);

@@ -4,15 +4,20 @@
 namespace MYMVC\CONTROLLERS;
 
 
-use MYMVC\MODELS\UsersModel;
+use MYMVC\MODELS\UsersGroupsModel;
 
 class UsersGroupsController extends AbstractController
 {
 
     public function defaultAction(){
         $this->_language->load('usersgroups','default');
-        $this->_data['users'] = UsersModel::getAll();
+        $this->_data['usersgroups'] = UsersGroupsModel::getAll();
         $this->view();
     }
 
+
+    public function addAction(){
+        $this->_language->load('usersgroups','add');
+        $this->view();
+    }
 }

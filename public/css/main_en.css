@@ -2891,14 +2891,6 @@ input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="butto
     display: block
 }
 
-.navbar {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    padding: .5rem 1rem
-}
 
 .navbar .container, .navbar .container-fluid, .navbar > .container-sm, .navbar > .container-md, .navbar > .container-lg, .navbar > .container-xl {
     display: flex;
@@ -8794,11 +8786,9 @@ h1 span {
     background: #222d32;
     position: fixed;
     left: -250px;
-    margin-top: 62px;
     width: 300px;
-    height: calc(100% - 7%);
+    height: 100%;
     padding: 0;
-    padding-top: 50px;
     color: #fff;
     transition-duration: 0.5s;
     transition-property: left;
@@ -8807,6 +8797,8 @@ h1 span {
 
 .navbar .navbar-info {
     width: 100%;
+    height: 34%;
+    padding-top: 112px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -8828,12 +8820,17 @@ h1 span {
 }
 
 .navbar .links {
-    height: inherit;
+    align-self: flex-start;
+    overflow: auto;
+    height: 66%;
     width: 100%;
     box-sizing: border-box;
+    scrollbar-width: none;
 }
 
-
+.navbar .links::-webkit-scrollbar{
+    display: none;
+}
 
 .navbar .links a {
     color: #b8c7ce;
@@ -8909,6 +8906,7 @@ h1 span {
 }
 .navbar.open .links a {
     width: 100%;
+    font-size: initial;
 }
 .navbar.open .links a i{
     border: none;
@@ -8920,9 +8918,9 @@ h1 span {
     background: #1979a9;
 }
 
-.links > li.active > a {
-    border-left: 2px solid #f1f1f1;
 
+.open .links > li.active > a {
+    border-left: 2px solid #f1f1f1;
 }
 
 
