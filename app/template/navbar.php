@@ -13,8 +13,8 @@
             </a>
         </li> <!-- dashboard link -->
 
-        <li class="parent_link <?= $this->checkurl('/children')== true ? 'active' : '' ?>" >
-            <a href="/children" title="<?= isset($Text_children) ? $Text_children : '' ?>" data-toggletool="tooltip" data-placement="right">
+        <li class="parent_link <?= $this->checkurl('/births')== true ? 'active' : '' ?>" >
+            <a href="/births" title="<?= isset($Text_children) ? $Text_children : '' ?>" data-toggletool="tooltip" data-placement="right">
                 <i class="fa fa-baby fa-fw"></i>
                 <span> <?= isset($Text_children) ? $Text_children : '' ?> </span>
             </a>
