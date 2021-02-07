@@ -1,7 +1,7 @@
 <?php
 
 
-namespace MYMVC\CONTROLLERS;
+namespace children\CONTROLLERS;
 
 
 class NotFoundController extends AbstractController

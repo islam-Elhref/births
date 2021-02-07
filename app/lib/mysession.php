@@ -1,6 +1,6 @@
 <?php
 
-namespace MYMVC\LIB;
+namespace children\LIB;
 
 
 use SessionHandler;

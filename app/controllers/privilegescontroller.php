@@ -1,10 +1,10 @@
 <?php
 
-namespace MYMVC\CONTROLLERS;
+namespace children\CONTROLLERS;
 
-use MYMVC\LIB\filter;
-use MYMVC\LIB\Helper;
-use MYMVC\MODELS\privilegesmodel;
+use children\LIB\filter;
+use children\LIB\Helper;
+use children\MODELS\privilegesmodel;
 use PDOException;
 
 class PrivilegesController extends AbstractController
@@ -12,7 +12,7 @@ class PrivilegesController extends AbstractController
     use filter;
     use Helper;
 
-    private $called_class = 'MYMVC\MODELS\privilegesmodel';
+    private $called_class = 'children\MODELS\privilegesmodel';
 
     public function defaultAction()
     {

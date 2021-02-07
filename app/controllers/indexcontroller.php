@@ -1,14 +1,14 @@
 <?php
 
 
-namespace MYMVC\CONTROLLERS;
+namespace children\CONTROLLERS;
 
 
-class IndexController extends AbstractController
+class indexcontroller extends AbstractController
 {
 
     public function defaultAction(){
-        $this->_language->load('Index','default');
+        $this->_language->load('index','default');
         $this->view();
     }
 

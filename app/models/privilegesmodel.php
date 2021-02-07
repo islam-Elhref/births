@@ -1,10 +1,10 @@
 <?php
 
 
-namespace MYMVC\MODELS;
+namespace children\MODELS;
 
 
-use MYMVC\LIB\filter;
+use children\LIB\filter;
 
 class privilegesmodel extends AbstractModel
 {

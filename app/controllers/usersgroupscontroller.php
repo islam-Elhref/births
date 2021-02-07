@@ -1,12 +1,13 @@
 <?php
 
 
-namespace MYMVC\CONTROLLERS;
+namespace children\CONTROLLERS;
 
 
-use MYMVC\LIB\filter;
-use MYMVC\LIB\Helper;
-use MYMVC\MODELS\UsersGroupsModel;
+use children\LIB\filter;
+use children\LIB\Helper;
+use children\MODELS\privilegesmodel;
+use children\MODELS\UsersGroupsModel;
 use PDOException;
 
 class UsersGroupsController extends AbstractController
@@ -15,7 +16,7 @@ class UsersGroupsController extends AbstractController
     use filter;
     use Helper;
 
-    private $called_class = 'MYMVC\MODELS\UsersGroupsModel';
+    private $called_class = 'children\MODELS\UsersGroupsModel';
 
 
     public function defaultAction()
@@ -66,6 +67,7 @@ class UsersGroupsController extends AbstractController
     public function addAction()
     {
         $this->_language->load('usersgroups', 'add');
+        $this->_data['privileges'] = privilegesmodel::getAll();
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             $new_users_group = new UsersGroupsModel($_POST['name']);
 

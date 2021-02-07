@@ -1,5 +1,5 @@
 <?php
-namespace MYMVC\LIB\Database;
+namespace children\LIB\Database;
 
 
 abstract class DatabaseHandler

@@ -1,10 +1,10 @@
 <?php
 
-namespace MYMVC\MODELS;
+namespace children\MODELS;
 
 
 use Exception;
-use MYMVC\LIB\Database\DatabaseHandler;
+use children\LIB\Database\DatabaseHandler;
 use \pdo;
 use PDOException;
 use \PDOStatement;

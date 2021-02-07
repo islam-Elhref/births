@@ -1,10 +1,10 @@
 <?php
 
 
-namespace MYMVC\CONTROLLERS;
+namespace children\CONTROLLERS;
 
 
-use MYMVC\MODELS\UsersModel;
+use children\MODELS\UsersModel;
 
 class usersController extends AbstractController
 {

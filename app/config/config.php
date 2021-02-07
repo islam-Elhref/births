@@ -24,7 +24,7 @@ defined('defaultLanguage')                ? null : define('defaultLanguage' , 'a
 // session config
 
 defined('Session_Name')                ? null : define('Session_Name' , 'sess_store');
-defined('Session_Domain')                ? null : define('Session_Domain' , '.mymvc.com');
+defined('Session_Domain')                ? null : define('Session_Domain' , '.children.com');
 defined('SESSION_LIFETIME')                ? null : define('SESSION_LIFETIME' , '0');
 
 

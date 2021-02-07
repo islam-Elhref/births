@@ -1,10 +1,10 @@
 <?php
 
 
-namespace MYMVC\CONTROLLERS;
+namespace children\CONTROLLERS;
 
 
-use MYMVC\LIB\FrontController;
+use children\LIB\FrontController;
 
 class AbstractController
 {

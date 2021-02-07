@@ -1,11 +1,11 @@
 <?php
-namespace MYMVC\LIB;
+namespace children\LIB;
 
 class Autoload
 {
 
     public static function autoload($classname){
-        $classname = strtolower(str_replace('MYMVC', '', $classname));
+        $classname = strtolower(str_replace('children', '', $classname));
         $classname = str_replace('\\', DS, $classname);
         $path = APP_PATH . $classname . '.php' ;
         if (file_exists($path)){

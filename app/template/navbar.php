@@ -13,76 +13,19 @@
             </a>
         </li> <!-- dashboard link -->
 
-        <li class="parent_link"  > <!-- transactions link parent -->
-            <a href="#transactions" data-toggletool="tooltip" data-placement="right" title="<?= isset($Text_transactions) ? $Text_transactions : '' ?>">
-                <i class="fas fa-exchange-alt "></i>
-                <span> <?= isset($Text_transactions) ? $Text_transactions : '' ?> </span>
+        <li class="parent_link <?= $this->checkurl('/children')== true ? 'active' : '' ?>" >
+            <a href="/children" title="<?= isset($Text_children) ? $Text_children : '' ?>" data-toggletool="tooltip" data-placement="right">
+                <i class="fa fa-baby fa-fw"></i>
+                <span> <?= isset($Text_children) ? $Text_children : '' ?> </span>
             </a>
-            <ul class="list-unstyled submenu" id="transactions"> <!-- transactions submenu  -->
-                <li class="<?= $this->checkurl('/purchases')== true ? 'subactive' : '' ?>">
-                    <a href="/purchases" title="<?= isset($Text_transactions_purchases) ? $Text_transactions_purchases : '' ?>" data-toggletool="tooltip" data-placement="right">
-                        <i class="fas fa-cart-arrow-down fa-fw"></i>
-                        <span> <?= isset($Text_transactions_purchases) ? $Text_transactions_purchases : '' ?> </span>
-                    </a>
-                </li>
-                <li class="<?= $this->checkurl('/sales')== true ? 'subactive' : '' ?>">
-                    <a href="/sales" title="<?= isset($Text_sales) ? $Text_sales : 'المبيعات' ?>" data-toggletool="tooltip" data-placement="right">
-                        <i class="fa  fa-money-bill"></i>
-                        <span> <?= isset($Text_sales) ? $Text_sales : 'المبيعات' ?> </span>
-                    </a>
-                </li>
-            </ul>
+        </li>
 
-        </li> <!-- transactions link parent -->
-
-        <li class="parent_link" > <!-- expenses link parent -->
-            <a href="#expenses" title="<?= isset($Text_expenses) ? $Text_expenses : '' ?>" data-toggletool="tooltip" data-placement="right"  >
-                <i class="fas fa-money-check-alt "></i>
-                <span> <?= isset($Text_expenses) ? $Text_expenses : '' ?> </span>
+        <li class="parent_link <?= $this->checkurl('/arrival')== true ? 'active' : '' ?>" >
+            <a href="/arrival" title="<?= isset($Text_arrival) ? $Text_arrival : '' ?>" data-toggletool="tooltip" data-placement="right">
+                <i class="fa fa-baby-carriage fa-fw"></i>
+                <span> <?= isset($Text_arrival) ? $Text_arrival : '' ?> </span>
             </a>
-
-            <ul class="list-unstyled  submenu" id="expenses"> <!-- expenses submenu  -->
-                <li class="<?= $this->checkurl('/expenses_categories')== true ? 'subactive' : '' ?>">
-                    <a href="/expenses_categories" title="<?= isset($Text_expenses_categories) ? $Text_expenses_categories : '' ?>" data-toggletool="tooltip" data-placement="right"  >
-                        <i class="fa  fa-money-bill"></i>
-                        <span> <?= isset($Text_expenses_categories) ? $Text_expenses_categories : '' ?> </span>
-                    </a>
-                </li>
-                <li class="<?= $this->checkurl('/daily_expensses')== true ? 'subactive' : '' ?>">
-                    <a href="/daily_expensses"  title="<?= isset($Text_expenses_daily_list) ? $Text_expenses_daily_list : '' ?>" data-toggletool="tooltip" data-placement="right" >
-                        <i class="fas fa-cart-arrow-down "></i>
-                        <span> <?= isset($Text_expenses_daily_list) ? $Text_expenses_daily_list : '' ?> </span>
-                    </a>
-                </li>
-            </ul>
-
-        </li> <!-- expenses link parent end -->
-
-
-        <li class="parent_link" > <!-- store link parent -->
-            <a href="#store" title="<?= isset($Text_store) ? $Text_store : '' ?>" data-toggletool="tooltip" data-placement="right">
-                <i class="fa fa-store fa-fw"></i>
-                <span> <?= isset($Text_store) ? $Text_store : '' ?> </span>
-            </a>
-
-            <ul class="list-unstyled  submenu" id="store"> <!-- expenses submenu  -->
-
-                <li class="<?= $this->checkurl('/products_categories')== true ? 'subactive' : '' ?>">
-                    <a href="/products_categories" title="<?= isset($Text_product_categories) ? $Text_product_categories : '' ?>"  data-toggletool="tooltip" data-placement="right">
-                        <i class="fa  fa-money-bill"></i>
-                        <span> <?= isset($Text_product_categories) ? $Text_product_categories : '' ?> </span>
-                    </a>
-                </li>
-                <li class="<?= $this->checkurl('/products')== true ? 'subactive' : '' ?>">
-                    <a href="/products"  title="<?= isset($Text_products) ? $Text_products : '' ?>"  data-toggletool="tooltip" data-placement="right">
-                        <i class="fas fa-cart-arrow-down fa-fw"></i>
-                        <span> <?= isset($Text_products) ? $Text_products : '' ?> </span>
-                    </a>
-                </li>
-
-            </ul>
-
-        </li> <!-- store link parent end -->
+        </li>
 
 
         <li class="parent_link" >
@@ -114,19 +57,6 @@
             </ul>
         </li>
 
-        <li class="parent_link <?= $this->checkurl('/clients')== true ? 'active' : '' ?>" >
-            <a href="/clients" title="<?= isset($Text_clients) ? $Text_clients : '' ?>" data-toggletool="tooltip" data-placement="right">
-                <i class="fa fa-address-card fa-fw"></i>
-                <span> <?= isset($Text_clients) ? $Text_clients : '' ?> </span>
-            </a>
-        </li>
-
-        <li class="parent_link <?= $this->checkurl('/suppliers')== true ? 'active' : '' ?>" >
-            <a href="/suppliers" title="<?= isset($Text_suppliers) ? $Text_suppliers : '' ?>" data-toggletool="tooltip" data-placement="right" >
-                <i class="fas fa-user-friends fa-fw"></i>
-                <span> <?= isset($Text_suppliers) ? $Text_suppliers : '' ?> </span>
-            </a>
-        </li>
 
         <li class="parent_link <?= $this->checkurl('/reports')== true ? 'active' : '' ?> " >
             <a href="/reports" title="<?= isset($Text_reports) ? $Text_reports : '' ?>" data-toggletool="tooltip" data-placement="right">

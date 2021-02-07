@@ -1,6 +1,6 @@
 <?php
 
-namespace MYMVC\LIB\Database;
+namespace children\LIB\Database;
 
 use PDO;
 use PDOException;

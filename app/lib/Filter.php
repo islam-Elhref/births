@@ -1,7 +1,7 @@
 <?php
 
 
-namespace MYMVC\LIB;
+namespace children\LIB;
 
 
 trait filter

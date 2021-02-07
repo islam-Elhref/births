@@ -1,11 +1,11 @@
 <?php
 
-namespace MYMVC\LIB;
+namespace children\LIB;
 
 
 class FrontController
 {
-    const NOT_FOUND_CONTROLLER = 'MYMVC\CONTROLLERS\\' . 'NotFoundController';
+    const NOT_FOUND_CONTROLLER = 'children\CONTROLLERS\\' . 'NotFoundController';
     const NOT_FOUND_ACTION = 'notfoundAction';
     private $_controller;
     private $_action;
@@ -36,7 +36,7 @@ class FrontController
     public function dispatch()
     {
 
-        $Class_controller = 'MYMVC\CONTROLLERS\\' . ucfirst($this->_controller) . 'Controller';
+        $Class_controller = 'children\CONTROLLERS\\' . ucfirst($this->_controller) . 'Controller';
         $actionName = lcfirst($this->_action) . 'Action';
 
         if (!class_exists($Class_controller)) {

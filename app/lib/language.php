@@ -1,5 +1,5 @@
 <?php
-namespace MYMVC\LIB;
+namespace children\LIB;
 
 
 class Language
