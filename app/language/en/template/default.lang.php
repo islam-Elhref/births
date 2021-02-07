@@ -16,6 +16,7 @@ $_['text_users_group'] = 'Users Groups';
 $_['text_users_privilege'] = 'Privileges';
 $_['Text_children'] = 'Births' ;
 $_['Text_arrival'] = 'arrival' ;
+$_['error_text'] = 'page not fount please click here to return to home page';
 
 
 $_['Text_reports'] = 'Reports' ;
