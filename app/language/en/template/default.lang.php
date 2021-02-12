@@ -7,7 +7,7 @@ $_['h1SecondName'] = 'matay administration ';
 $_['Text_user_info'] = 'User Information';
 
 // navbar links
-$_['Text_changeLanguage'] = 'arabic' ;
+$_['Text_changeLanguage'] = 'عربي' ;
 $_['Text_home'] = 'General Stats.' ;;
 
 $_['Text_users'] = 'Users' ;
@@ -19,4 +19,4 @@ $_['Text_arrival'] = 'arrival' ;
 $_['error_text'] = 'page not fount please click here to return to home page';
 
 
-$_['Text_reports'] = 'Reports' ;
+$_['Text_places'] = 'places' ;

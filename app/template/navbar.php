@@ -28,40 +28,18 @@
         </li>
 
 
-        <li class="parent_link" >
-            <a href="#users" title="<?= isset($Text_users) ? $Text_users : '' ?>" data-toggletool="tooltip" data-placement="right">
-                <i class="fas fa-user fa-fw"></i>
+        <li class="parent_link <?= $this->checkurl('/users')== true ? 'active' : '' ?>" >
+            <a href="/users" title="<?= isset($Text_users) ? $Text_users : '' ?>" data-toggletool="tooltip" data-placement="right">
+                <i class="fas fa-users fa-fw"></i>
                 <span> <?= isset($Text_users) ? $Text_users : '' ?> </span>
             </a>
-            <ul class="list-unstyled  submenu" id="users"> <!-- expenses submenu  -->
-
-                <li class="<?= $this->checkurl('/users')== true ? 'subactive' : '' ?>"  >
-                    <a href="/users"  title="<?= isset($Text_users_list) ? $Text_users_list : '' ?>" data-toggletool="tooltip" data-placement="right" >
-                        <i class="fas fa-user-circle fa-fw"></i>
-                        <span> <?= isset($Text_users_list) ? $Text_users_list : '' ?> </span>
-                    </a>
-                </li>
-                <li class="<?= $this->checkurl('/usersgroups')== true ? 'subactive' : '' ?>">
-                    <a href="/usersgroups"  title="<?= isset($text_users_group) ? $text_users_group : '' ?>" data-toggletool="tooltip" data-placement="right">
-                        <i class="fas fa-users fa-fw"></i>
-                        <span> <?= isset($text_users_group) ? $text_users_group : '' ?> </span>
-                    </a>
-                </li>
-                <li class="<?= $this->checkurl('/privileges')== true ? 'subactive' : '' ?>">
-                    <a href="/privileges" title="<?= isset($text_users_privilege) ? $text_users_privilege : '' ?>" data-toggletool="tooltip" data-placement="right">
-                        <i class="fas fa-key fa-fw"></i>
-                        <span> <?= isset($text_users_privilege) ? $text_users_privilege : '' ?> </span>
-                    </a>
-                </li>
-
-            </ul>
         </li>
 
 
-        <li class="parent_link <?= $this->checkurl('/reports')== true ? 'active' : '' ?> " >
-            <a href="/reports" title="<?= isset($Text_reports) ? $Text_reports : '' ?>" data-toggletool="tooltip" data-placement="right">
-                <i class="fas fa-book fa-fw fa-fw"></i>
-                <span> <?= isset($Text_reports) ? $Text_reports : '' ?> </span>
+        <li class="parent_link <?= $this->checkurl('/places')== true ? 'active' : '' ?> " >
+            <a href="/places" title="<?= isset($Text_places) ? $Text_places : '' ?>" data-toggletool="tooltip" data-placement="right">
+                <i class="fas fa-place-of-worship fa-fw fa-fw"></i>
+                <span> <?= isset($Text_places) ? $Text_places : '' ?> </span>
             </a>
         </li>
 

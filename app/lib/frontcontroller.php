@@ -36,16 +36,27 @@ class FrontController
     public function dispatch()
     {
 
-        $Class_controller = 'children\CONTROLLERS\\' . ucfirst($this->_controller) . 'Controller';
-        $actionName = lcfirst($this->_action) . 'Action';
+
+            $Class_controller = 'children\CONTROLLERS\\' . ucfirst($this->_controller) . 'Controller';
+            $actionName = lcfirst($this->_action) . 'Action';
 
         if (!class_exists($Class_controller)) {
             $Class_controller = self::NOT_FOUND_CONTROLLER;
+        }
+
+        if (!isset($_SESSION['userID']) && $this->_controller !== 'language' ) {
+            $Class_controller = 'children\CONTROLLERS\\' . 'loginController';
         }
         $controller = new $Class_controller();
 
         if (!method_exists($controller, $actionName)) {
             $this->_action = $actionName = $this::NOT_FOUND_ACTION;
+        }
+
+        if (!isset($_SESSION['userID']) && $this->_controller !== 'language'  ) {
+            $actionName = 'defaultAction';
+            $this->_controller = 'login';
+            $this->_action = 'default';
         }
 
 

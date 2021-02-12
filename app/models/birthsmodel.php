@@ -6,58 +6,135 @@ namespace children\MODELS;
 
 use children\LIB\filter;
 
-class privilegesmodel extends AbstractModel
+class birthsmodel extends AbstractModel
 {
 
     use filter;
 
-    public static $tableName = 'users_privilege';
-    public static $primaryKey = 'privilege_id';
+    public static $tableName = 'births';
+    public static $primaryKey = 'child_id';
 
     public static $table_schema = [
-        'privilege_name' => self::DATA_TYPE_STR,
-        'privilege_url' => self::DATA_TYPE_STR
+        'name' => self::DATA_TYPE_STR,
+        'const' => self::DATA_TYPE_int,
+        'dob' => self::DATA_TYPE_STR,
+        'created_by' => self::DATA_TYPE_int,
+        'phone' => self::DATA_TYPE_STR,
+        'born_in' => self::DATA_TYPE_int,
+        'address' => self::DATA_TYPE_STR,
     ];
 
-    protected $privilege_id, $privilege_name , $privilege_url;
+    protected $child_id, $name , $const , $dob , $created_by , $phone , $born_in , $address ;
 
-    public function __construct(string $privilege_name , string $privilege_url)
+    public function __construct(string $name , int $const , string $dob , int $created_by , $phone , int $born_in , $address )
     {
+        $date_from_user = strtotime($dob);
+        $minstrdate =strtotime('1-1-2018');
+        $today = time();
 
-        if (!preg_match('|/.+|' , $privilege_url)){
+        if ($date_from_user > $minstrdate && $date_from_user < $today ){
+
+            $this->dob =trim( $this->filterString($dob));
+
+        }else{
             $lang = $_SESSION['lang'];
             if ($lang === 'ar') {
-                $this->message[] = 'يجب كتابة الرابط الخاص بالصلاحيه مثل  clients/';
+                $this->message[] = 'يجب كتابة تاريخ الميلاد بين 2018 وحتي اليوم';
             } else {
-                $this->message[] = 'Please Write a Valid Privilege Url Like /clients';
+                $this->message[] = 'you must write date of birth between 2018 until today ';
             }
         }
-
-        $this->privilege_name = $this->filterString($privilege_name);
-        $this->privilege_url = $this->filterString($privilege_url);
+        $this->name = trim($this->filterString($name));
+        $this->const =trim( $this->filterInt($const));
+        $this->created_by =trim( $this->filterInt($created_by));
+        $this->phone =trim( $this->filterInt($phone));
+        $this->born_in = trim($this->filterInt($born_in));
+        $this->address = trim($this->filterString($address));
 
     }
 
 
-
-    public function setPrivilegeId($privilege_id)
+    public function getChildId()
     {
-        $this->privilege_id = $privilege_id;
+        return $this->child_id;
     }
 
-    public function getPrivilegeId()
+
+    public function setChildId($child_id)
     {
-        return $this->privilege_id;
+        $this->child_id = $child_id;
     }
 
-    public function getPrivilegeName()
+    public function getName()
     {
-        return $this->privilege_name;
+        return $this->name;
     }
 
-    public function getPrivilegeUrl()
+    public function setName($name)
     {
-        return $this->privilege_url;
+        $this->name = $name;
+    }
+
+    public function getConst()
+    {
+        return $this->const;
+    }
+
+    public function setConst($const)
+    {
+        $this->const = $const;
+    }
+
+    public function getDob()
+    {
+        return $this->dob;
+    }
+
+    public function setDob($dob)
+    {
+        $this->dob = $dob;
+    }
+
+    public function getCreatedBy()
+    {
+        return $this->created_by;
+    }
+
+    public function setCreatedBy($created_by)
+    {
+        $this->created_by = $created_by;
+    }
+
+    public function getBornIn()
+    {
+        return $this->born_in;
+    }
+
+    public function setBornIn($born_in)
+    {
+        $this->born_in = $born_in;
+    }
+
+    public function getPlaceName()
+    {
+        return $this->place_name;
+    }
+
+
+    public function setPlaceName($place_name)
+    {
+        $this->place_name = $place_name;
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+
+    public function getAddress()
+    {
+        return $this->address;
     }
 
 

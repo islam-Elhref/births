@@ -11,7 +11,7 @@ $_['text_delete_title'] = 'Sure You Want To Delete This Baby';
 
 
 
-$_['text_table_privilege_name'] = 'The Baby Name';
+$_['text_table_name'] = 'The Baby Name';
 $_['text_table_const'] = 'Const';
 $_['text_table_dob'] = 'Date Of Birth';
 $_['text_table_live_in'] = 'Live In';

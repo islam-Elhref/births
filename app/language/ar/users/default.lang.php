@@ -10,10 +10,8 @@ $_['text_add_new_user'] = 'اضافة مستخدم جديد' ;
 
 $_['text_table_username'] = 'اسم المستخدم';
 $_['text_table_group'] = 'الصلاحية';
-$_['text_table_email'] = 'البريد الألكتروني';
 $_['text_table_phone'] = 'رقم الهاتف';
-$_['text_table_subscription_date'] = 'تاريخ الأنضمام';
-$_['text_table_last_login'] = 'اخر دخول';
+$_['text_table_work_in'] = 'يعمل في';
 $_['text_table_control'] = 'التحكم';
 
 

@@ -8772,6 +8772,10 @@ legend{
     position: inherit !important;
 }
 
+.select_box{
+    direction: rtl;
+}
+
 /* checkbtn */
 
 

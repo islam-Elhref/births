@@ -3,12 +3,12 @@
         <div class="dropdown">
             <button class="btn dropdown-toggle btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                مرحبا اسلام
+                <?= isset($ActiveUser) && $ActiveUser != false ? $ActiveUser->getUsername() : '' ?>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                 <a class="dropdown-item" href="#"> <?= isset($Text_user_info) ? $Text_user_info : '' ?> </a>
                 <div class="dropdown-divider"></div>
-                <a class="text-light dropdown-item-text fa fa-sign-out-alt" href="#"> <?= isset($Text_logout) ? $Text_logout : '' ?></a>
+                <a class="text-light dropdown-item-text fa fa-sign-out-alt" href="/logout"> <?= isset($Text_logout) ? $Text_logout : '' ?></a>
             </div>
         </div>
     </div>

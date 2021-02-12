@@ -4,10 +4,16 @@
 namespace children\CONTROLLERS;
 
 
+use children\LIB\filter;
 use children\LIB\FrontController;
+use children\LIB\Helper;
+use children\MODELS\UsersModel;
 
 class AbstractController
 {
+    use filter;
+    use Helper;
+
     private $_controller;
     private $_action;
     protected $_params;
@@ -15,6 +21,13 @@ class AbstractController
     protected $_language;
     protected $_session;
     protected $_data = [];
+
+    public function __construct()
+    {
+        if (isset($_SESSION['userID'])){
+            $this->_data['ActiveUser'] = UsersModel::getByPK($this->filterInt($_SESSION['userID']));
+        }
+    }
 
     public function notfoundAction()
     {

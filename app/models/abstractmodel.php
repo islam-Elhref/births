@@ -57,26 +57,24 @@ class AbstractModel
 
     }
 
-    public static function getAll($key = '', $type = 'ASC')
+    public static function getAll($join = '' , $where = '')
     {
-        if ($key == '') {
-            $key = static::$primaryKey;
-        }
-        if ($type !== 'ASC' && $type !== 'DESC') {
-            $type = 'ASC';
-        }
 
-        $sql = 'SELECT * FROM ' . static::$tableName . ' ORDER BY `' . $key . '`' . $type;
-        $stmt = DatabaseHandler::factory()->prepare($sql);
-        $stmt->execute();
-        if (method_exists(get_called_class(), '__construct')) {
-            $result = $stmt->fetchAll(pdo::FETCH_CLASS | pdo::FETCH_PROPS_LATE, get_called_class(), static::$table_schema);
-        } else {
-            $result = $stmt->fetchAll(pdo::FETCH_CLASS, get_called_class());
-        }
+        try {
+            $sql = 'SELECT * FROM ' . static::$tableName . ' '. $join . ' ' . $where;
+            $stmt = DatabaseHandler::factory()->prepare($sql);
+            $stmt->execute();
+            if (method_exists(get_called_class(), '__construct')) {
+                $result = $stmt->fetchAll(pdo::FETCH_CLASS | pdo::FETCH_PROPS_LATE, get_called_class(), static::$table_schema);
+            } else {
+                $result = $stmt->fetchAll(pdo::FETCH_CLASS, get_called_class());
+            }
 
-        if (is_array($result) && !empty($result)) {
-            return $result;
+            if (is_array($result) && !empty($result)) {
+                return $result;
+            }
+        }catch (PDOException $e){
+            return false;
         }
 
     }
@@ -104,6 +102,41 @@ class AbstractModel
             }
 
         }
+    }
+
+    public static function getwhere($condation)
+    {
+        $column = array_keys($condation);
+        $value = array_values($condation);
+
+        $whereArray = [];
+
+        for ($i = 0,$ii = count($column); $i < $ii ; $i++ ){
+            $whereArray[] = $column[$i] .' =:' . $column[$i] ;
+        }
+        $where = implode( ' AND ' ,$whereArray);
+
+
+            $sql = 'select * from ' . static::$tableName . ' where ' . $where;
+            $stmt = DatabaseHandler::factory()->prepare($sql);
+
+            if (method_exists(get_called_class(), '__construct')) {
+                $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, get_called_class(), static::$table_schema);
+            } else {
+                $stmt->setFetchMode(pdo::FETCH_CLASS, get_called_class());
+            }
+
+            for ($i = 0,$ii = count($value); $i < $ii ; $i++ ){
+                $stmt->bindValue(':' . $column[$i], $value[$i], pdo::PARAM_STR);
+            }
+            $stmt->execute();
+            $result = $stmt->fetch();
+            if (is_a($result, get_called_class()) && !empty($result)) {
+                return $result;
+            }else{
+                return false;
+            }
+
     }
 
     private function update()
@@ -141,13 +174,15 @@ class AbstractModel
         $stmt->execute();
     }
 
-    public function check_input_empty()
+    public function check_input_empty($agnore = '')
     {
         foreach ($this as $key => $value) {
             if ($key == static::$primaryKey) {
                 continue;
-            } else {
-                if ($value == '') {
+            }elseif ($key == $agnore || $key == 'message'){
+                continue;
+            }else {
+                if (trim($value) == '') {
                     $lang = $_SESSION['lang'];
 
                     if ($lang === 'ar') {

@@ -10,6 +10,7 @@ class Template
 
     public function GetMessage()
     {
+
         if (isset($_SESSION['message'])) {
             if (!isset($_SESSION['error'])) {
                 ?>
@@ -83,7 +84,11 @@ class Template
             if ($key == ':view') {
                 require_once $view;
             } else {
-                require_once $path;
+                if ( !isset($_SESSION['userID']) ) {
+
+                }else{
+                    require_once $path;
+                }
             }
         }
     }
