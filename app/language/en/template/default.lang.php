@@ -1,12 +1,22 @@
 <?php
-$_['Text_home'] = 'Home' ;
-$_['Text_employees'] = 'Employees' ;
-$_['Text_changeLanguage'] = 'arabic' ;
+
+
 $_['Text_logout'] = 'LogOut' ;
-$_['h1FirstName'] = 'Elhref';
-$_['h1SecondName'] = 'com';
+$_['h1FirstName'] = 'Births';
+$_['h1SecondName'] = 'matay administration ';
 $_['Text_user_info'] = 'User Information';
-$_['Text_change_pass'] = 'Change Password';
-$_['Text_settings'] = 'Settings';
+
+// navbar links
+$_['Text_changeLanguage'] = 'عربي' ;
+$_['Text_home'] = 'General Stats.' ;;
+
+$_['Text_users'] = 'Users' ;
+$_['Text_users_list'] = 'Users List' ;
+$_['text_users_group'] = 'Users Groups';
+$_['text_users_privilege'] = 'Privileges';
+$_['Text_children'] = 'Births' ;
+$_['Text_arrival'] = 'arrival' ;
+$_['error_text'] = 'page not fount please click here to return to home page';
 
 
+$_['Text_places'] = 'places' ;

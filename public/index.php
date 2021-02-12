@@ -1,11 +1,11 @@
 <?php
-namespace MYMVC;
+namespace children;
 
 
-use MYMVC\LIB\FrontController;
-use MYMVC\LIB\Language;
-use MYMVC\LIB\MySession;
-use MYMVC\LIB\Template;
+use children\LIB\FrontController;
+use children\LIB\Language;
+use children\LIB\MySession;
+use children\LIB\Template;
 
 require_once '..'.DIRECTORY_SEPARATOR.'app'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'config.php';
 require_once LIB_PATH . 'autoload.php';
@@ -13,8 +13,8 @@ $temp_paths = require_once APP_PATH . 'config'.DS.'temp_config.php';
 
 
 // session;
-$session = new MySession();
-$session->start();
+$mysession = new MySession();
+$mysession->start();
 
 // session
 
@@ -26,9 +26,8 @@ $language = new Language();
 $template = new Template($temp_paths);
 
 
-$controller = new FrontController($template , $language , $session);
+$controller = new FrontController($template , $language , $mysession);
 $controller->dispatch();
-
 
 
 

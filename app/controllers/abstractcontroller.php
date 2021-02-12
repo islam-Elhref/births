@@ -1,13 +1,19 @@
 <?php
 
 
-namespace MYMVC\CONTROLLERS;
+namespace children\CONTROLLERS;
 
 
-use MYMVC\LIB\FrontController;
+use children\LIB\filter;
+use children\LIB\FrontController;
+use children\LIB\Helper;
+use children\MODELS\UsersModel;
 
 class AbstractController
 {
+    use filter;
+    use Helper;
+
     private $_controller;
     private $_action;
     protected $_params;
@@ -16,7 +22,16 @@ class AbstractController
     protected $_session;
     protected $_data = [];
 
-    public function notfoundAction(){
+    public function __construct()
+    {
+        if (isset($_SESSION['userID'])){
+            $this->_data['ActiveUser'] = UsersModel::getByPK($this->filterInt($_SESSION['userID']));
+        }
+    }
+
+    public function notfoundAction()
+    {
+        $this->_language->load('notfound','default');
         $this->view();
     }
 
@@ -51,26 +66,25 @@ class AbstractController
         $this->_session = $session;
     }
 
-    public function view(){
-        if ($this->_action == FrontController::NOT_FOUND_ACTION){
-            require_once VIEWS_PATH . 'notfound' . DS . 'notfound.view.php';
-        }else{
-            $file_view = VIEWS_PATH . $this->_controller . DS . $this->_action .'.view.php';
-            if (file_exists($file_view)){
-                $this->_language->loadLangTemp();
-                $this->_language->load();
 
-                $this->_data = array_merge($this->_data , $this->_language->getDictionary() );
 
-                $this->_data['session'] = $this->_session;
+    public function view()
+    {
+        $file_view = VIEWS_PATH . $this->_controller . DS . $this->_action . '.view.php';
 
-                $this->_template->setData($this->_data);
-                $this->_template->render($file_view);
-            }else{
-                require_once VIEWS_PATH . 'notfound' . DS . 'notfound_file.view.php';
-            }
-
+        if ($this->_action == FrontController::NOT_FOUND_ACTION || !file_exists($file_view) ) {
+            $file_view = VIEWS_PATH . 'notfound' . DS . 'notfound.view.php';
         }
+
+        $this->_language->load('template','default');
+
+        $this->_data = array_merge($this->_data, $this->_language->getDictionary());
+
+        $this->_data['session'] = $_SESSION;
+
+        $this->_template->setData($this->_data);
+        $this->_template->render($file_view);
+
     }
 
 

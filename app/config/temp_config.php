@@ -12,9 +12,11 @@ return [
     'header_resources' =>[
         'bootstrap' => '/css/bootstrap.css',
         'foawsome' => '/css/all.css',
+        'googleIcon' => 'https://fonts.googleapis.com/icon?family=Material+Icons',
         'datatables' => '/css/datatables.min.css',
         'confirm' => '/css/jquery-confirm.min.css',
-        'main' => '/css/main.css',
+        'main_ar' => '/css/main_ar.css',
+        'main_en' => '/css/main_en.css',
     ],
 
     'footer_resources' =>[
@@ -24,6 +26,8 @@ return [
         'datatables' => '/js/en/datatables_en.min.js',
         'bootstrap4' => '/js/vendor/dataTables.bootstrap4.min.js',
         'confirm' => '/js/vendor/jquery-confirm.min.js',
+        'js_ar' => '/js/js_ar.js',
+        'js_en' => '/js/js_en.js',
         'main' => '/js/main.js',
 
     ]

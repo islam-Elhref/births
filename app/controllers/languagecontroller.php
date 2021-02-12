@@ -1,8 +1,8 @@
 <?php
-namespace MYMVC\CONTROLLERS;
+namespace children\CONTROLLERS;
 
 
-use MYMVC\LIB\Helper;
+use children\LIB\Helper;
 
 class LanguageController extends AbstractController
 {
