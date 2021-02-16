@@ -42,7 +42,7 @@ $('#open_nav').click(function () {
 $('.box').on('focus', function () {
     $(this).parent().find('label').addClass('active')
 }).on('blur', function () {
-    if (!this.value && $(this).attr('type') != 'date' ) {
+    if (!this.value && $(this).attr('data-date') != 'date' ) {
         $(this).parent().find('label').removeClass('active')
     }
 })
@@ -147,11 +147,14 @@ $('.links').children('li').click(function () {
 })
 
 
-
-$('.datepicker').datepicker();
-
-
-
+$('#sandbox-container input').datepicker({
+    format: "yyyy/mm/dd",
+    language: "ar",
+    orientation: "auto",
+    autoclose: true,
+    todayHighlight: true,
+    multidateSeparator: "/"
+});
 
 
 

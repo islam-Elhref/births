@@ -14,12 +14,21 @@
                 <div class="valid-feedback"><?= isset($valid_msg) ? $valid_msg : '' ?> </div>
                 <div class="invalid-feedback"><?= isset($invalid_msg_const) ? $invalid_msg_const : '' ?></div>
             </div> <!-- password -->
-            <div class="form-group">
+
+            <div class="form-group" id="sandbox-container">
                 <label for="dob" class="active"><?= isset($Text_dob) ? $Text_dob : '' ?></label>
-                <input type="date" class="form-control box" id="dob" required name="dob" placeholder="تاريخ الميلاد">
-                <div class="valid-feedback"><?= isset($valid_msg) ? $valid_msg : '' ?> </div>
-                <div class="invalid-feedback"><?= isset($invalid_msg_dob) ? $invalid_msg_dob : '' ?></div>
-            </div> <!-- dob -->
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="far fa-calendar-alt"></i>
+                        </div>
+                    </div>
+                    <input type="text" data-date="date" class="form-control box" id="dob" required name="dob">
+                    <div class="valid-feedback"><?= isset($valid_msg) ? $valid_msg : '' ?> </div>
+                    <div class="invalid-feedback"><?= isset($invalid_msg_dob) ? $invalid_msg_dob : '' ?></div>
+                </div>
+            </div> <!-- input date -->
+
             <div class="form-group">
                 <label for="phone"><?= isset($Text_phone) ? $Text_phone : '' ?></label>
                 <input type="tel" class="form-control box" id="phone" required name="phone" maxlength="11" pattern="0[0-9]{10}">

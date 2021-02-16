@@ -3,11 +3,10 @@
 namespace children\MODELS;
 
 
-use Exception;
 use children\LIB\Database\DatabaseHandler;
-use \pdo;
+use pdo;
 use PDOException;
-use \PDOStatement;
+use PDOStatement;
 
 class AbstractModel
 {
@@ -57,11 +56,11 @@ class AbstractModel
 
     }
 
-    public static function getAll($join = '' , $where = '')
+    public static function getAll($join = '', $where = '')
     {
 
         try {
-            $sql = 'SELECT * FROM ' . static::$tableName . ' '. $join . ' ' . $where;
+            $sql = 'SELECT * FROM ' . static::$tableName . ' ' . $join . ' ' . $where;
             $stmt = DatabaseHandler::factory()->prepare($sql);
             $stmt->execute();
             if (method_exists(get_called_class(), '__construct')) {
@@ -73,7 +72,51 @@ class AbstractModel
             if (is_array($result) && !empty($result)) {
                 return $result;
             }
-        }catch (PDOException $e){
+        } catch (PDOException $e) {
+            return false;
+        }
+
+    }
+
+    public static function getbysql($sql)
+    {
+
+        try {
+            $stmt = DatabaseHandler::factory()->prepare($sql);
+            $stmt->execute();
+            if (method_exists(get_called_class(), '__construct')) {
+                $result = $stmt->fetchAll(pdo::FETCH_CLASS | pdo::FETCH_PROPS_LATE, get_called_class(), static::$table_schema);
+            } else {
+                $result = $stmt->fetchAll(pdo::FETCH_CLASS, get_called_class());
+            }
+
+            if (is_array($result) && !empty($result)) {
+                return $result;
+            }
+        } catch (PDOException $e) {
+            return false;
+        }
+
+    }
+
+    public static function getonebysql($sql)
+    {
+
+        try {
+            $stmt = DatabaseHandler::factory()->prepare($sql);
+            $stmt->execute();
+            if (method_exists(get_called_class(), '__construct')) {
+                $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, get_called_class(), static::$table_schema);
+            } else {
+                $stmt->setFetchMode(pdo::FETCH_CLASS, get_called_class());
+            }
+
+            $stmt->execute();
+            $result = $stmt->fetch();
+            if (is_a($result, get_called_class()) && !empty($result)) {
+                return $result;
+            }
+        } catch (PDOException $e) {
             return false;
         }
 
@@ -97,7 +140,7 @@ class AbstractModel
             $result = $stmt->fetch();
             if (is_a($result, get_called_class()) && !empty($result)) {
                 return $result;
-            }else{
+            } else {
                 return false;
             }
 
@@ -111,31 +154,31 @@ class AbstractModel
 
         $whereArray = [];
 
-        for ($i = 0,$ii = count($column); $i < $ii ; $i++ ){
-            $whereArray[] = $column[$i] .' =:' . $column[$i] ;
+        for ($i = 0, $ii = count($column); $i < $ii; $i++) {
+            $whereArray[] = $column[$i] . ' =:' . $column[$i];
         }
-        $where = implode( ' AND ' ,$whereArray);
+        $where = implode(' AND ', $whereArray);
 
 
-            $sql = 'select * from ' . static::$tableName . ' where ' . $where;
-            $stmt = DatabaseHandler::factory()->prepare($sql);
+        $sql = 'select * from ' . static::$tableName . ' where ' . $where;
+        $stmt = DatabaseHandler::factory()->prepare($sql);
 
-            if (method_exists(get_called_class(), '__construct')) {
-                $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, get_called_class(), static::$table_schema);
-            } else {
-                $stmt->setFetchMode(pdo::FETCH_CLASS, get_called_class());
-            }
+        if (method_exists(get_called_class(), '__construct')) {
+            $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, get_called_class(), static::$table_schema);
+        } else {
+            $stmt->setFetchMode(pdo::FETCH_CLASS, get_called_class());
+        }
 
-            for ($i = 0,$ii = count($value); $i < $ii ; $i++ ){
-                $stmt->bindValue(':' . $column[$i], $value[$i], pdo::PARAM_STR);
-            }
-            $stmt->execute();
-            $result = $stmt->fetch();
-            if (is_a($result, get_called_class()) && !empty($result)) {
-                return $result;
-            }else{
-                return false;
-            }
+        for ($i = 0, $ii = count($value); $i < $ii; $i++) {
+            $stmt->bindValue(':' . $column[$i], $value[$i], pdo::PARAM_STR);
+        }
+        $stmt->execute();
+        $result = $stmt->fetch();
+        if (is_a($result, get_called_class()) && !empty($result)) {
+            return $result;
+        } else {
+            return false;
+        }
 
     }
 
@@ -179,16 +222,16 @@ class AbstractModel
         foreach ($this as $key => $value) {
             if ($key == static::$primaryKey) {
                 continue;
-            }elseif ($key == $agnore || $key == 'message'){
+            } elseif ($key == $agnore || $key == 'message') {
                 continue;
-            }else {
+            } else {
                 if (trim($value) == '') {
                     $lang = $_SESSION['lang'];
 
                     if ($lang === 'ar') {
-                        $this->message[]= $key . ' لا يجب ان يكون فارغ' . '<br>';
+                        $this->message[] = $key . ' لا يجب ان يكون فارغ' . '<br>';
                     } else {
-                        $this->message[]= $key . ' must be not empty ' . '<br>';
+                        $this->message[] = $key . ' must be not empty ' . '<br>';
                     }
                     $_SESSION['error'] = 'error';
 

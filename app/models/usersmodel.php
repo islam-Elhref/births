@@ -113,6 +113,22 @@ class UsersModel extends AbstractModel {
         return $this->place_name;
     }
 
+    public function getMyBirths(){
+        return $this->mybirths;
+    }
+    public function getOtherBirths(){
+        return $this->otherbirths;
+    }
+
+    public function getcountUsers(){
+        return $this->count_users;
+    }
+    public function getcountBirths(){
+        return $this->count_births;
+    }
+    public function getcountPlaces(){
+        return $this->count_places;
+    }
 
 
 }

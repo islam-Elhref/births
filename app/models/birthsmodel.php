@@ -29,13 +29,11 @@ class birthsmodel extends AbstractModel
     public function __construct(string $name , int $const , string $dob , int $created_by , $phone , int $born_in , $address )
     {
         $date_from_user = strtotime($dob);
-        $minstrdate =strtotime('1-1-2018');
+        $minstrdate =strtotime('2020/1/1');
         $today = time();
 
         if ($date_from_user > $minstrdate && $date_from_user < $today ){
-
-            $this->dob =trim( $this->filterString($dob));
-
+            $this->dob =date( 'y-m-d' , $date_from_user );
         }else{
             $lang = $_SESSION['lang'];
             if ($lang === 'ar') {
@@ -135,6 +133,21 @@ class birthsmodel extends AbstractModel
     public function getAddress()
     {
         return $this->address;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+    /**
+     * @return string
+     */
+    public function getConstIn()
+    {
+        return $this->const_in;
     }
 
 

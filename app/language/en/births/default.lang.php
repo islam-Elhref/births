@@ -18,3 +18,7 @@ $_['text_table_live_in'] = 'Live In';
 $_['text_table_control'] = 'Control';
 
 
+
+$_['text_table_const_in'] = 'Const in unit';
+$_['text_table_address'] = 'Full Address';
+$_['text_table_editor'] = 'You can only edit with ';

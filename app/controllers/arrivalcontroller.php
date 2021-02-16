@@ -9,6 +9,7 @@ use children\MODELS\birthsmodel;
 class arrivalController extends AbstractController
 {
     public function defaultAction(){
+
         $workIn = $this->filterInt($this->_data['ActiveUser']->getWorkIn());
 
         $this->_language->load('arrival','default');
@@ -17,5 +18,9 @@ class arrivalController extends AbstractController
                         JOIN places AS places2 ON users.work_in = places2.place_id',
             'WHERE created_by != "'.$_SESSION['userID'].'" AND born_in = "'.$workIn.'" ORDER BY `births`.`dob` DESC' );
         $this->view();
+
     }
+
+
+
 }

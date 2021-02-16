@@ -67,6 +67,28 @@ class AbstractController
     }
 
 
+   public static function loading($name){
+
+
+
+       if(mb_detect_encoding($name) == 'UTF-8') {
+           $strlen = mb_strlen($name , 'UTF-8');
+           $delay = 0;
+           for( $i = 0; $i <= $strlen; $i++ ) {
+               $char = mb_substr( $name, $i, 1 , "UTF-8");
+               $delay += 0.2;
+               echo "<span style='animation-delay:$delay\s'>$char</span>";
+           }
+       }else{
+           $delay = 0;
+           for ($i = 0; $i < strlen($name); $i++) {
+               $delay += 0.2;
+               echo "<span style='animation-delay:$delay\s'>$name[$i]</span>";
+           };
+       }
+    }
+
+
 
     public function view()
     {

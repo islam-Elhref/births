@@ -20,3 +20,6 @@ $_['error_text'] = 'page not fount please click here to return to home page';
 
 
 $_['Text_places'] = 'places' ;
+
+$_['text_artur'] = 'Islam Ali' ;
+

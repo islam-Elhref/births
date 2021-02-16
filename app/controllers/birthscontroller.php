@@ -20,16 +20,29 @@ class BirthsController extends AbstractController
 
     public function defaultAction()
     {
-        $this->_language->load('births', 'default');
-        $this->_data['children'] = birthsmodel::getAll('JOIN places ON births.born_in = places.place_id', 'where `created_by`= "' . $_SESSION['userID'] . '"');
-        $this->view();
+        if (isset($this->_data['ActiveUser']) && $this->_data['ActiveUser']->getGroupId() == 1) {
+            $this->_language->load('births', 'default');
+            $this->_data['children'] = birthsmodel::getbysql("SELECT * , c.place_name as 'live_in' , c2.place_name as 'const_in'
+                                                                FROM births 
+                                                                JOIN users ON births.created_by = users.user_id
+                                                                JOIN places AS c2 ON users.work_in = c2.place_id
+                                                                JOIN places as c ON births.born_in = c.place_id");
+
+            $this->view();
+        }else{
+            $this->_language->load('births', 'default');
+            $this->_data['children'] = birthsmodel::getAll('JOIN places ON births.born_in = places.place_id', 'where `created_by`= "' . $_SESSION['userID'] . '"');
+            $this->view();
+        }
+
     }
 
 
-    public function addAction(){
+    public function addAction()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             $created_by = $this->_data['ActiveUser']->getUserId();
-            $new_baby = new birthsmodel($_POST['name'], $_POST['const'] , $_POST['dob'] , $created_by , $_POST['phone'] , $_POST['born_in'] , $_POST['address']   );
+            $new_baby = new birthsmodel($_POST['name'], $_POST['const'], $_POST['dob'], $created_by, $_POST['phone'], $_POST['born_in'], $_POST['address']);
             if ($new_baby->check_input_empty('place_name') === true) {
                 try {
                     $new_baby->save();
@@ -47,56 +60,46 @@ class BirthsController extends AbstractController
         $this->view();
     }
 
-    public function editAction() {
-        if (isset($this->_data['ActiveUser']) && $this->_data['ActiveUser']->getGroupId() == 1) {
+    public function editAction()
+    {
 
-            if (isset($this->_params[0])) {
-                $userId = abs($this->filterInt($this->_params[0]));
-                $user = UsersModel::getByPK($userId);
-                if ($user != false && !empty($user) && is_a($user, $this->called_class)) {
+        if (isset($this->_params[0])) {
+            $childId = abs($this->filterInt($this->_params[0]));
+            $child = birthsmodel::getwhere(['child_id' => $childId, 'created_by' => $this->_data['ActiveUser']->getUserId()]);
+            if ($child != false && !empty($child) && is_a($child, $this->called_class)) {
 
-                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-                        $password = '';
-                        if ($_POST['password'] === $user->getPassword()) {
-                            $password = $user->getPassword();
-                        } else {
-                            $password = md5($_POST['password']);
+                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+                    $created_by = $this->_data['ActiveUser']->getUserId();
+                    $new_baby = new birthsmodel($_POST['name'], $_POST['const'], $_POST['dob'], $created_by, $_POST['phone'], $_POST['born_in'], $_POST['address']);
+                    $new_baby->setChildId($childId);
+                    if ($new_baby->check_input_empty('place_name') === true) {
+                        try {
+                            $new_baby->save();
+                            $this->write_msg('تم حفظ المولود بنجاح', 'A New baby has been successfully added');
+
+                        } catch (PDOException $e) {
+                            $this->write_msg('. هناك خطأ ؟ لم يتم الحفظ', 'There is an error ? Not saved .');
+                            $_SESSION['error'] = 'error';
                         }
-                        $new_user = new UsersModel($_POST['name'], $password, $_POST['phone'], $_POST['work_in'], $_POST['group']);
-                        $new_user->setUserId($user->getUserId());
-                        if ($new_user->check_input_empty('place_name') === true) {
-                            try {
-                                $new_user->save();
-                                $this->write_msg('تم حفظ المستخدم بنجاح', 'A New user has been successfully added');
-
-                            } catch (PDOException $e) {
-                                $this->write_msg('. هناك خطأ ؟ لم يتم الحفظ', 'There is an error ? Not saved .');
-                                $_SESSION['error'] = 'error';
-                            }
-                        }
-                        $this->redirect('/users');
                     }
-
-                    $this->_language->load('users', 'edit');
-                    $this->_data['places'] = placesmodel::getAll();
-                    $this->_data['user'] = $user;
-                    $this->view();
-                } else {
-                    $this->redirect('/users');
+                    $this->redirect('/births');
                 }
-            } else {
-                $this->redirect('/users');
-            }
 
+                $this->_data['child'] = $child;
+                $this->_language->load('births', 'edit');
+                $this->_data['places'] = placesmodel::getAll();
+                $this->view();
+            } else {
+                $this->redirect('/births');
+            }
         } else {
-            $this->redirect('/users');
+            $this->redirect('/births');
         }
 
     }
 
     public function deleteAction()
     {
-        if (isset($this->_data['ActiveUser']) && $this->_data['ActiveUser']->getGroupId() == 1) {
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 $path = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH);
@@ -104,33 +107,28 @@ class BirthsController extends AbstractController
                 $path = '';
             }
 
-            if (isset($this->_params[0]) && $path == '/users') {
+            if (isset($this->_params[0]) && $path == '/births') {
 
-                $usersId = abs($this->filterInt($this->_params[0]));
-                $user = UsersModel::getByPK($usersId);
-                if (!empty($user) && is_a($user, $this->called_class)) {
+                $childId = abs($this->filterInt($this->_params[0]));
+                $child = birthsmodel::getwhere(['child_id' => $childId, 'created_by' => $this->_data['ActiveUser']->getUserId()]);
+                if (!empty($child) && is_a($child, $this->called_class)) {
                     try {
-                        $usersName = $user->getUsername();
-                        $user->delete();
-                        if ($user->getUserId() == $this->_data['ActiveUser']->getUserId()) {
-                            session_unset();
-                            session_destroy();
-                            $this->_data['ActiveUser'] = '';
-                        } else {
-                            $this->write_msg("تم حذف المستخدم $usersName بنجاح", "A User $usersName has been successfully deleted");
-                        }
+                        $childName = $child->getName();
+                        $child->delete();
+
+                        $this->write_msg("تم حذف المستخدم $childName بنجاح", "A User $childName has been successfully deleted");
+
                     } catch (PDOException $e) {
                         $this->write_msg('. هناك خطأ ما ؟ لم يتم الحذف', 'There is an error? Not Delete .');
                         $_SESSION['error'] = 'error';
                     }
-                    $this->redirect('/users');
+                    $this->redirect('/births');
 
                 } else {
-                    $this->redirect('/users');
+                    $this->redirect('/births');
                 }
             } else {
-                $this->redirect('/users');
+                $this->redirect('/births');
             }
         }
-    }
 }
